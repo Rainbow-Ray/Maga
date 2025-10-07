@@ -81,8 +81,9 @@ if st.button('Запустить анализ'):
     df = df[df['Fare']  >= num1]
     df = df[df['Fare']  <= num2]
     df = df[df['Survived']  == 1 ]
-    df = df.groupby(by='Pclass').count()
-    df = df['PassengerId']
+    df = df.rename(columns={'Pclass': 'Класс', 'PassengerId': "Количество"})
+    df = df.groupby(by='Класс').count()
+    df = df['Количество']
     st.subheader("Количество выживших женщин по классу:")
     st.dataframe(df) # Интерактивная таблица
          # Или st.table(df) для статичной таблиц
