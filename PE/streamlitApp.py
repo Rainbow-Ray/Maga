@@ -22,7 +22,7 @@ def t2(num1, num2):
         }
     }
 
-
+    df = pd.read_csv('data.csv')
 
     f = open('data.csv')
 
