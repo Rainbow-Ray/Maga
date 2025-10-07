@@ -22,6 +22,11 @@ def t2(num1, num2):
         }
     }
 
+
+
+    f = open('data.csv')
+
+
     with open('data.csv', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for line in reader:
