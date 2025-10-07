@@ -54,7 +54,7 @@ if st.button('Запустить анализ'):
         # Get the directory of the current script
         script_dir = os.path.dirname(__file__)
         # Construct the absolute path to your file
-        file_path = os.path.join(script_dir, 'data', 'data.csv')
+        file_path = os.path.join(script_dir, 'data.csv')
 
         try:
             a =1
