@@ -22,7 +22,7 @@ def t2(num1, num2):
         }
     }
 
-    with open('https://github.com/Rainbow-Ray/Maga/blob/main/PE/data.csv', encoding='utf-8') as f:
+    with open('https:\\github.com\\Rainbow-Ray\\Maga\\blob\\main\\PE\\data.csv', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for line in reader:
             if line['Survived'] == '1' and line['Sex'] == 'female' and line['Fare'] >= num1 and line['Fare'] <= num2:
