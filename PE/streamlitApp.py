@@ -81,7 +81,7 @@ if st.button('Запустить анализ'):
     df = df[df['Fare']  >= num1]
     df = df[df['Fare']  <= num2]
     df = df[df['Survived']  == 1 ]
-    df = df.groupby(by='Pclass')
+    df = df.groupby(by='Pclass').count()
     st.subheader(":")
     st.dataframe(df) # Интерактивная таблица
          # Или st.table(df) для статичной таблиц
