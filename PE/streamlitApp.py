@@ -76,20 +76,14 @@ if st.button('Запустить анализ'):
             }
         }
 
-        with open(file_path, encoding='utf-8') as f:
-            reader = csv.DictReader(f)
-            for line in reader:
-                if line['Survived'] == '1' and line['Sex'] == 'female' and float(line['Fare']) >= num1 \
-                        and float(line[
-                    'Fare']) <= num2:
-                    js['sex']['female']['class'][line['Pclass']]['SurvivedCount'] += 1
+    df = pd.read_csv(file_path)
+    df = df[df['Sex']== 'female']
+    df = df[df['Fare']  >= num1]
+    df = df[df['Fare']  <= num2]
+    df = df[df['Survived']  == 1 ]
 
-                # passId = line['PassengerId']
-            print(js)
-            jsn = json.dumps(js)
-            df = pd.read_json(jsn)
-        st.subheader(":")
-        st.dataframe(df) # Интерактивная таблица
+    st.subheader(":")
+    st.dataframe(df) # Интерактивная таблица
          # Или st.table(df) для статичной таблиц
 
 
