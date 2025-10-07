@@ -2,6 +2,11 @@ import csv
 import streamlit as st
 import pandas as pd
 import json
+
+import os
+
+
+
 def t2(num1, num2):
     js = {
         'sex': {
@@ -46,6 +51,17 @@ num2 = st.number_input("", 1000)
 
 if st.button('Запустить анализ'):
     with st.spinner('Анализируем данные...'):
+        # Get the directory of the current script
+        script_dir = os.path.dirname(__file__)
+        # Construct the absolute path to your file
+        file_path = os.path.join(script_dir, 'data', 'data.csv')
+
+        try:
+            a =1
+            # df = pd.read_csv(file_path)
+            # st.write(df)
+        except FileNotFoundError:
+            st.error(f"Error: File not found at {file_path}")
 
         js = {
             'sex': {
@@ -66,7 +82,7 @@ if st.button('Запустить анализ'):
             }
         }
 
-        with open('data.csv', encoding='utf-8') as f:
+        with open(file_path, encoding='utf-8') as f:
             reader = csv.DictReader(f)
             for line in reader:
                 if line['Survived'] == '1' and line['Sex'] == 'female' and line['Fare'] >= num1 and line[
