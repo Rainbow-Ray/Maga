@@ -22,11 +22,6 @@ def t2(num1, num2):
         }
     }
 
-    df = pd.read_csv('data.csv')
-
-    f = open('data.csv')
-
-
     with open('data.csv', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for line in reader:
@@ -51,7 +46,39 @@ num2 = st.number_input("", 1000)
 
 if st.button('Запустить анализ'):
     with st.spinner('Анализируем данные...'):
-        df = t2(num1,num2)
+
+        js = {
+            'sex': {
+                'female': {
+                    'class': {
+                        '1': {
+                            'SurvivedCount': 0
+                        },
+                        '2': {
+                            'SurvivedCount': 0
+                        },
+                        '3': {
+                            'SurvivedCount': 0
+                        },
+
+                    }
+                },
+            }
+        }
+
+        with open('data.csv', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            for line in reader:
+                if line['Survived'] == '1' and line['Sex'] == 'female' and line['Fare'] >= num1 and line[
+                    'Fare'] <= num2:
+                    js['sex']['female']['class'][line['Pclass']]['SurvivedCount'] += 1
+
+                # passId = line['PassengerId']
+            print(js)
+
+        jsn = json.dumps(js)
+        df = pd.read_json(jsn)
+
 
         st.subheader(":")
         st.dataframe(df) # Интерактивная таблица
