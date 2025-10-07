@@ -44,7 +44,6 @@ def t2(num1, num2):
 st.image('https://hi-news.ru/wp-content/uploads/2020/09/titanic_fail_image_one-750x460.jpg')
 st.title("Данные пассажиров Титаника")
 st.header("Выжившие женщины по каждому классу обслуживания")
-st.write("Здесь я могу выводить любой текст, данные и графики.")
 # 2. Поле ввода текста
 num1 = st.number_input("Диапазон платы за проезд:", 0)
 num2 = st.number_input("", 0)
