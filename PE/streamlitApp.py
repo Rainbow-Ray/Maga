@@ -1,8 +1,6 @@
 import csv
 import streamlit as st
 
-
-# 1. Заголовки и текст
 st.title("Мое первое ИИ-приложение")
 st.header("Раздел для анализа данных")
 st.write("Здесь я могу выводить любой текст, данные и графики.")
@@ -23,27 +21,6 @@ dataset = st.selectbox(
  "Выберите датасет:",
  ('Iris', 'Titanic', 'Boston Housing')
 )
-# 6. Кнопка
-if st.button('Запустить анализ'):
- # Эта часть кода выполнится только при нажатии кнопки
- with st.spinner('Анализируем данные...'):
- # Имитация долгой работы (например, инференс модели)
- import time
- time.sleep(2)
- st.success('Анализ завершен!')
- # 7. Генерация и отображение таблицы с данными
- data = np.random.randn(5, 3)
- df = pd.DataFrame(data, columns=[f'Колонка {i}' for i in range(1, 4)])
- st.subheader("Сгенерированные данные:")
- st.dataframe(df) # Интерактивная таблица
- # Или st.table(df) для статичной таблицы
-# Боковая панель (Sidebar)
-with st.sidebar:
- st.header("Настройки")
- confidence = st.slider("Порог уверенности модели:", 0.0, 1.0, 0.8)
- st.info(f"Порог уверенности: {confidence}")
-Запуск приложения:
-streamlit streamlit_app.py
 
 def t2():
     js = {
