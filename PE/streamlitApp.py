@@ -56,12 +56,6 @@ if st.button('Запустить анализ'):
         # Construct the absolute path to your file
         file_path = os.path.join(script_dir, 'data.csv')
 
-        try:
-            a =1
-            # df = pd.read_csv(file_path)
-            # st.write(df)
-        except FileNotFoundError:
-            st.error(f"Error: File not found at {file_path}")
 
         js = {
             'sex': {
@@ -92,11 +86,8 @@ if st.button('Запустить анализ'):
 
                 # passId = line['PassengerId']
             print(js)
-
-        jsn = json.dumps(js)
-        df = pd.read_json(jsn)
-
-
+            jsn = json.dumps(js)
+            df = pd.read_json(jsn)
         st.subheader(":")
         st.dataframe(df) # Интерактивная таблица
          # Или st.table(df) для статичной таблиц
