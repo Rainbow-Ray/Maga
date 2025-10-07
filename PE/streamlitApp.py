@@ -85,8 +85,9 @@ if st.button('Запустить анализ'):
         with open(file_path, encoding='utf-8') as f:
             reader = csv.DictReader(f)
             for line in reader:
-                if line['Survived'] == '1' and line['Sex'] == 'female' and line['Fare'] >= num1 and line[
-                    'Fare'] <= num2:
+                if line['Survived'] == '1' and line['Sex'] == 'female' and int(line['Fare']) >= num1 \
+                        and int(line[
+                    'Fare']) <= num2:
                     js['sex']['female']['class'][line['Pclass']]['SurvivedCount'] += 1
 
                 # passId = line['PassengerId']
