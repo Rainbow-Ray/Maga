@@ -13,22 +13,24 @@ def survivedFare(df, num1, num2):
     df = df['Количество']
     return df
 
-st.image('https://hi-news.ru/wp-content/uploads/2020/09/titanic_fail_image_one-750x460.jpg')
-st.title("Данные пассажиров Титаника")
-st.header("Выжившие женщины по каждому классу обслуживания")
 
-num1 = st.number_input("Диапазон платы за проезд:", 0)
-num2 = st.number_input("", 0)
+def streamlit():
+    st.image('https://hi-news.ru/wp-content/uploads/2020/09/titanic_fail_image_one-750x460.jpg')
+    st.title("Данные пассажиров Титаника")
+    st.header("Выжившие женщины по каждому классу обслуживания")
 
-if st.button('Запустить анализ'):
-    script_dir = os.path.dirname(__file__)
-    file_path = os.path.join(script_dir, 'data.csv')
+    num1 = st.number_input("Диапазон платы за проезд:", 0)
+    num2 = st.number_input("", 0)
 
-    df = pd.read_csv(file_path)
-    df = survivedFare(df, num1, num2)
-    st.subheader("Количество выживших женщин по классу:")
-    st.dataframe(df) # Интерактивная таблица
-         # Или st.table(df) для статичной таблиц
+    if st.button('Запустить анализ'):
+        script_dir = os.path.dirname(__file__)
+        file_path = os.path.join(script_dir, 'data.csv')
+
+        df = pd.read_csv(file_path)
+        df = survivedFare(df, num1, num2)
+        st.subheader("Количество выживших женщин по классу:")
+        st.dataframe(df) # Интерактивная таблица
+             # Или st.table(df) для статичной таблиц
 
 
-
+streamlit()
