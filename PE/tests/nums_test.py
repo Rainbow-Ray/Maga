@@ -1,12 +1,13 @@
 import pytest
 import pandas as pd
+from PE.streamlitApp import survivedFare
 
-def survivedFare(df, num1, num2):
-    df = df[(df['Survived'] == 1) & (df['Sex'] == 'female') & (df['Fare'] >= num1) &(df['Fare'] <= num2)]
-    df = df.rename(columns={'Pclass': 'Класс', 'PassengerId': "Количество"})
-    df = df.groupby(by='Класс').count()
-    df = df['Количество']
-    return df
+# def survivedFare(df, num1, num2):
+#     df = df[(df['Survived'] == 1) & (df['Sex'] == 'female') & (df['Fare'] >= num1) &(df['Fare'] <= num2)]
+#     df = df.rename(columns={'Pclass': 'Класс', 'PassengerId': "Количество"})
+#     df = df.groupby(by='Класс').count()
+#     df = df['Количество']
+#     return df
 
 header = ['PassengerId', 'Survived', 'Pclass', 'Sex', 'Fare']
 none = survivedFare(pd.DataFrame(columns=['PassengerId', 'Survived', 'Pclass', 'Sex', 'Fare']), 0, 0)
