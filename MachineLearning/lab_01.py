@@ -2,7 +2,7 @@ import pandas as pd
 
 def clean():
 
-    df = pd.read_csv('cars.csv')
+    df = pd.read_csv('Data/cars.csv')
 
     print(df.info())
 
@@ -14,7 +14,7 @@ def clean():
 
     df.to_csv('cars_clean.csv', index=False)
 
-df = pd.read_csv('cars_clean.csv')
+df = pd.read_csv('Data/cars_clean.csv')
 
 # print(df.head(6))
 # print(df.tail(9))

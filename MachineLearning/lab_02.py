@@ -165,7 +165,7 @@ def clean_rare(df, cat_col):
 
 
 def cleaning_data():
-    df = pd.read_csv('cars_clean.csv')
+    df = pd.read_csv('Data/cars_clean.csv')
     cat_col = []
     num_col = []
 
@@ -232,7 +232,7 @@ def column_count(df):
 
 
 
-df = pd.read_csv('cars_cleanest.csv')
+df = pd.read_csv('Data/cars_cleanest.csv')
 binary_to_num(df)
 cat_col, num_col = column_count(df)
 
