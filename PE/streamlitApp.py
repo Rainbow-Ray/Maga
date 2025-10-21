@@ -6,86 +6,31 @@ import json
 import os
 
 
-
-def t2(num1, num2):
-    js = {
-        'sex': {
-            'female': {
-                'class': {
-                    '1': {
-                        'SurvivedCount': 0
-                    },
-                    '2': {
-                        'SurvivedCount': 0
-                    },
-                    '3': {
-                        'SurvivedCount': 0
-                    },
-
-                }
-            },
-        }
-    }
-
-    with open('data.csv', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        for line in reader:
-            if line['Survived'] == '1' and line['Sex'] == 'female' and line['Fare'] >= num1 and line['Fare'] <= num2:
-                js['sex']['female']['class'][line['Pclass']]['SurvivedCount'] += 1
-
-            # passId = line['PassengerId']
-        print(js)
-
-    jsn = json.dumps(js)
-    df = pd.read_json(jsn)
-    return df
-
-
-st.image('https://hi-news.ru/wp-content/uploads/2020/09/titanic_fail_image_one-750x460.jpg')
-st.title("Данные пассажиров Титаника")
-st.header("Выжившие женщины по каждому классу обслуживания")
-# 2. Поле ввода текста
-num1 = st.number_input("Диапазон платы за проезд:", 0)
-num2 = st.number_input("", 0)
-
-if st.button('Запустить анализ'):
-    with st.spinner('Анализируем данные...'):
-        # Get the directory of the current script
-        script_dir = os.path.dirname(__file__)
-        # Construct the absolute path to your file
-        file_path = os.path.join(script_dir, 'data.csv')
-
-
-        js = {
-            'sex': {
-                'female': {
-                    'class': {
-                        '1': {
-                            'SurvivedCount': 0
-                        },
-                        '2': {
-                            'SurvivedCount': 0
-                        },
-                        '3': {
-                            'SurvivedCount': 0
-                        },
-
-                    }
-                },
-            }
-        }
-
-    df = pd.read_csv(file_path)
-    df = df[df['Sex']== 'female']
-    df = df[df['Fare']  >= num1]
-    df = df[df['Fare']  <= num2]
-    df = df[df['Survived']  == 1 ]
+def survivedFare(df, num1, num2):
+    df = df[(df['Survived'] == 1) & (df['Sex'] == 'female') & (df['Fare'] >= num1) &(df['Fare'] <= num2)]
     df = df.rename(columns={'Pclass': 'Класс', 'PassengerId': "Количество"})
     df = df.groupby(by='Класс').count()
     df = df['Количество']
-    st.subheader("Количество выживших женщин по классу:")
-    st.dataframe(df) # Интерактивная таблица
-         # Или st.table(df) для статичной таблиц
+    return df
 
 
+def streamlit():
+    st.image('https://hi-news.ru/wp-content/uploads/2020/09/titanic_fail_image_one-750x460.jpg')
+    st.title("Данные пассажиров Титаника")
+    st.header("Выжившие женщины по каждому классу обслуживания")
 
+    num1 = st.number_input("Диапазон платы за проезд:", 0)
+    num2 = st.number_input("", 0)
+
+    if st.button('Запустить анализ'):
+        script_dir = os.path.dirname(__file__)
+        file_path = os.path.join(script_dir, 'data.csv')
+
+        df = pd.read_csv(file_path)
+        df = survivedFare(df, num1, num2)
+        st.subheader("Количество выживших женщин по классу:")
+        st.dataframe(df) # Интерактивная таблица
+             # Или st.table(df) для статичной таблиц
+
+
+streamlit()
