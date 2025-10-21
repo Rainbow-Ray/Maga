@@ -230,8 +230,23 @@ def column_count(df):
     return cat_col, num_col
 
 
+
+
 df = pd.read_csv('cars_cleanest.csv')
-cat_col, num_col = column_count(df)
 binary_to_num(df)
+cat_col, num_col = column_count(df)
+
 cat_to_numCAT(df, cat_col)
-cat_to_numONEHOT(df)
+
+# df = pd.read_csv('cars_clean.csv')
+# cat_col, num_col = column_count(df)
+# columns_describe(cat_col, num_col)
+# df = data_cleanse(df)
+# df = add_km_year(df)
+# clean_rare(df, cat_col)
+#
+# binary_to_num(df)
+# add_km_year(df)
+# cat_to_numCAT(df, cat_col)
+# cat_to_numONEHOT(df)
+#
