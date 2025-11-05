@@ -1,3 +1,3 @@
 pandas == 2.1.4
 pytest == 8.4.2
-PE/streamlitApp.py
+streamlitApp @ https://github.com/Rainbow-Ray/Maga/PE
