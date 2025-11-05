@@ -5,7 +5,8 @@ import numpy as np
 import os
 
 
-root = 'img'
+root = "img"
+
 
 def dirTree(root, tree):
     tree.append(root)
@@ -15,11 +16,12 @@ def dirTree(root, tree):
             dirTree(brench, tree)
     return tree
 
+
 def main():
     tree = []
     tree = dirTree(root, tree)
-    images = ['.jpg', '.jpeg', '.png']
-    prefix = 'new'
+    images = [".jpg", ".jpeg", ".png"]
+    prefix = "new"
 
     makeNewDir(tree, prefix)
 
@@ -32,6 +34,7 @@ def main():
                     img_crop = image_crop(path)
                     saveImage(img_crop, path, prefix)
 
+
 def makeNewDir(tree, prefix):
     if not os.path.exists(prefix):
         os.mkdir(prefix)
@@ -42,12 +45,13 @@ def makeNewDir(tree, prefix):
             os.mkdir(path)
 
 
-
 def image_crop(image_path, prefix):
     img = cv.imread(image_path, cv.IMREAD_GRAYSCALE)
     threshold = 100
     canny_output = cv.Canny(img, threshold, threshold * 2)
-    drawing = np.zeros((canny_output.shape[0], canny_output.shape[1], 3), dtype=np.uint8)
+    drawing = np.zeros(
+        (canny_output.shape[0], canny_output.shape[1], 3), dtype=np.uint8
+    )
 
     contours, _ = cv.findContours(canny_output, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
 
@@ -58,10 +62,18 @@ def image_crop(image_path, prefix):
         boundRect[i] = cv.boundingRect(contours_poly[i])
 
     for i in range(len(contours)):
-        color = (rng.randint(0,256), rng.randint(0,256), rng.randint(0,256))
+        color = (rng.randint(0, 256), rng.randint(0, 256), rng.randint(0, 256))
         cv.drawContours(drawing, contours_poly, i, color)
-        cv.rectangle(drawing, (int(boundRect[i][0]), int(boundRect[i][1])), \
-          (int(boundRect[i][0]+boundRect[i][2]), int(boundRect[i][1]+boundRect[i][3])), color, 2)
+        cv.rectangle(
+            drawing,
+            (int(boundRect[i][0]), int(boundRect[i][1])),
+            (
+                int(boundRect[i][0] + boundRect[i][2]),
+                int(boundRect[i][1] + boundRect[i][3]),
+            ),
+            color,
+            2,
+        )
 
     # cv.imshow('c', drawing)
     # cv.waitKey(10)
@@ -87,13 +99,14 @@ def image_crop(image_path, prefix):
 
     pL = xMin - padX if xMin >= padX else xMin
     pR = xMax + padX if xMax + padX <= w else xMax
-    pUp =  yMin - padY if yMin > padY else yMin
+    pUp = yMin - padY if yMin > padY else yMin
     pLow = yMax + padY if yMax + padY <= h else yMax
 
     (left, upper, right, lower) = (pL, pUp, pR, pLow)
     im_crop = im.crop((left, upper, right, lower))
     return im_crop
     # im_crop.show()
+
 
 def saveImage(image, image_path, prefix):
     new_path = os.path.join(prefix, image_path)
